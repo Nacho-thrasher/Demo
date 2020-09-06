@@ -1,0 +1,84 @@
+ 	<!--=====================================
+	Section Gray
+	======================================-->  
+
+	<div class="ps-section--gray">
+
+        <div *ngIf="!cargando"
+         class="container">
+
+        	<!--=====================================
+			Products of category
+			======================================-->  
+
+            <div *ngFor="let category of categories; let lastIndex = last; let i = index"
+            class="ps-block--products-of-category">
+
+            	<!--=====================================
+				Menu subcategory
+				======================================-->  
+
+                <div class="ps-block__categories">
+
+                    <h3>{{category.name}}</h3>
+
+                        <ul [attr.category-showcase]="category.name">
+                            <!-- <li><a href="#">Best Seller</a></li> -->
+                        </ul>
+
+                        <a class="ps-block__more-link" routerLink="products/{{category.url}}">View All</a>
+
+                </div>
+
+                <!--=====================================
+				Vertical Slider Category
+				======================================-->  
+
+                <div class="ps-block__slider">
+
+                    <div [attr.category-sl]="category.url">
+
+                    	<!-- <a href="#">
+
+                    		<img src="{{path}}img/slider/vertical/clothing-1.jpg" alt="">
+
+                    	</a> -->
+
+                    </div>
+
+                </div>
+
+                <!--=====================================
+				Block Product Box
+				======================================-->  
+
+                <div [attr.category-pb]="category.url" class="ps-block__product-box">
+					
+					<!--=====================================
+					Product Simple
+					======================================--> 
+
+                    <!-- End Product Simple -->
+
+
+                </div><!-- End Block Product Box -->
+                
+            {{ lastIndex ? callback(i) : ""}}
+            </div><!-- End Products of category -->
+
+
+        </div><!-- End Container-->
+        <!--=====================================
+        Preload
+        ======================================-->
+        <div
+        *ngIf="cargando"
+        class="d-flex justify-content-center">
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div> 
+        </div>
+
+    </div><!-- End Section Gray-->

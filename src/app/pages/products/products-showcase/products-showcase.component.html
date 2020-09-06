@@ -1,0 +1,265 @@
+ <!--=====================================
+    Products found
+    ======================================--> 
+
+    <div class="ps-shopping ps-tab-root">
+
+    <!--=====================================
+    Shoping Header
+    ======================================--> 
+
+    <div class="ps-shopping__header">
+
+        <p><strong>{{productFound}}</strong> Productos Encontrados</p>
+
+        <div class="ps-shopping__actions">
+
+            <select *ngIf="sortItems.length > 0"
+            class="ps-select sortItems" data-placeholder="Sort Items">
+
+                <option *ngFor="let item of sortItems; let i = index"
+                [value]="sortValues[i]">
+                    {{item}}
+                </option>
+                
+            </select>
+
+            <div class="ps-shopping__view">
+
+                <p>View</p>
+
+                <ul class="ps-tab-list">
+
+                    <li class="active">
+                        <a href="#tab-1">
+                            <i class="icon-grid"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#tab-2">
+                            <i class="icon-list4"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--=====================================
+    Shoping Body
+    ======================================--> 
+
+    <div *ngIf="!cargando"
+     class="ps-tabs">
+
+        <!--=====================================
+        Grid View
+        ======================================--> 
+
+        <div class="ps-tab active" id="tab-1">
+
+            <div class="ps-shopping-product">
+
+                <div class="row">
+
+                    <!--=====================================
+                    Product
+                    ======================================--> 
+
+                    <div *ngFor="let Product of products; let i = index" 
+                    class="col-lg-2 col-md-4 col-6">
+
+                        <div class="ps-product">
+
+                            <div class="ps-product__thumbnail">
+
+                                <a href="product/{{Product.url}}">
+                                    <img src="{{path}}img/products/{{Product.category}}/{{Product.image}}" alt="">
+                                </a>
+
+                                <div [innerHTML]="price[i][1]" class=""></div>
+
+                                <ul class="ps-product__actions">
+
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                            <i class="icon-bag2"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="product/{{Product.url}}" data-toggle="tooltip" data-placement="top" title="Quick View">
+                                            <i class="icon-eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist">
+                                            <i class="icon-heart"></i>
+                                        </a>
+                                    </li> 
+
+                                </ul>
+
+                            </div>
+
+                            <div class="ps-product__container">
+
+                                <a class="ps-product__vendor" href="#">{{Product.store}}</a>
+
+                                <div class="ps-product__content">
+
+                                    <a class="ps-product__title" href="product/{{Product.url}}" >
+                                        {{Product.name}}
+                                    </a>
+
+                                    <div class="ps-product__rating">
+
+                                        <select class="ps-rating" data-read-only="true">
+            
+                                            <option *ngFor="let review of reviews[i]; let f = index" 
+                                            [value]="review">{{f+1}}</option>
+                                        
+                                        </select>
+            
+                                        <span>{{rating[i]}}</span>
+            
+                                    </div>
+            
+                                    <div [innerHTML]="price[i][0]" class=""></div>
+
+                                </div>
+
+                                <div class="ps-product__content hover">
+
+                                    <a class="ps-product__title" href="product/{{Product.url}}" >
+                                        {{Product.name}}
+                                    </a>
+
+                                    <div [innerHTML]="price[i][0]" class=""></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div><!-- End Product -->
+
+
+                </div>
+
+            </div>
+
+            <div class="ps-pagination">
+
+                <ul class="pagination"
+                [attr.data-total-pages]="totalPage"
+                [attr.data-actual-page]="page"
+                [attr.data-current-route]="currentRoute">
+                </ul>
+
+            </div>
+
+        </div><!-- End Grid View-->
+
+        <!--=====================================
+        List View
+        ======================================--> 
+
+        <div class="ps-tab" id="tab-2">
+
+            <div class="ps-shopping-product">
+
+                <!--=====================================
+                Product
+                ======================================--> 
+
+                <div *ngFor="let Product of products; let i = index; let lastIndex = last"
+                 class="ps-product ps-product--wide">
+   
+                    <div class="ps-product__thumbnail">
+
+                        <a href="product/{{Product.url}}">
+                            <img src="{{path}}img/products/{{Product.category}}/{{Product.image}}" alt="">
+                        </a>
+                        <div [innerHTML]="price[i][1]"></div>
+                    </div>
+
+                    <div class="ps-product__container">
+
+                        <div class="ps-product__content">
+
+                            <a class="ps-product__title" href="product/{{Product.url}}">
+                                {{Product.name}}
+                            </a>
+
+                            <div class="ps-product__rating">
+
+                                <select class="ps-rating" data-read-only="true">
+    
+                                    <option *ngFor="let review of reviews[i]; let f = index" 
+                                    [value]="review">{{f+1}}</option>
+                                
+                                </select>
+    
+                                <span>{{rating[i]}}</span>
+    
+                            </div>
+
+                            <p class="ps-product__vendor">Sold by:
+                                <a href="#">{{Product.store}}</a>
+                            </p>
+
+                            <div [innerHTML]="Product.summary"></div>
+
+                        </div>
+
+                        <div class="ps-product__shopping">
+
+                            <div [innerHTML]="price[i][0]" class=""></div>
+
+                            <a class="ps-btn" href="#">Add to cart</a>
+
+                            <ul class="ps-product__actions">
+                                <li><a href="product/{{Product.url}}"><i class="icon-eye"></i>View</a></li>
+                                <li><a href="#"><i class="icon-heart"></i> Wishlist</a></li>       
+                            </ul>
+
+                        </div>
+
+                    </div>
+                {{ lastIndex ? callback(params) : "" }}
+                </div> <!-- End Product -->
+
+
+            </div>
+
+            <div class="ps-pagination">
+
+                <ul class="pagination"
+                [attr.data-total-pages]="totalPage"
+                [attr.data-actual-page]="page"
+                [attr.data-current-route]="currentRoute">
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End Recommended Items -->
+        <!-- preload -->
+        <div *ngIf="cargando" class="">
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>          
+        </div>
+    </div>

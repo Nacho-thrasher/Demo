@@ -1,0 +1,137 @@
+<!--=====================================
+Recommended Items
+======================================-->
+
+<div *ngIf="!cargando" class="ps-block--shop-features">
+  <div class="ps-block__header">
+    <h3>Recommended Items</h3>
+
+    <div class="ps-block__navigation">
+      <a class="ps-carousel__prev" href="#recommended">
+        <i class="icon-chevron-left"></i>
+      </a>
+
+      <a class="ps-carousel__next" href="#recommended">
+        <i class="icon-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="ps-block__content">
+    <div
+      class="owl-slider"
+      id="recommended"
+      data-owl-auto="true"
+      data-owl-loop="true"
+      data-owl-speed="10000"
+      data-owl-gap="30"
+      data-owl-nav="false"
+      data-owl-dots="false"
+      data-owl-item="6"
+      data-owl-item-xs="2"
+      data-owl-item-sm="2"
+      data-owl-item-md="3"
+      data-owl-item-lg="4"
+      data-owl-item-xl="6"
+      data-owl-duration="1000"
+      data-owl-mousedrag="on"
+    >
+      <!--=====================================
+            Product
+            ======================================--> 
+
+            <div *ngFor="let product of recommendedItems; let i = index ;let lastIndex = last" 
+            class="ps-product">
+
+                <div class="ps-product__thumbnail">
+
+                    <a href="product/{{product.url}}">
+                        <img src="{{path}}img/products/{{product.category}}/{{product.image}}" alt="">
+                    </a>
+
+                    <ul class="ps-product__actions">
+
+                        <li>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                <i class="icon-bag2"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="product/{{product.url}}" data-toggle="tooltip" data-placement="top" title="Quick View">
+                                <i class="icon-eye"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Whishlist">
+                                <i class="icon-heart"></i>
+                            </a>
+                        </li>                                           
+
+                    </ul>
+
+                </div>
+
+                <div class="ps-product__container">
+
+                    <a class="ps-product__vendor" href="#">
+                        {{product.store}}
+                    </a>
+
+                    <div [innerHTML]="price[i][1]" class=""></div>
+
+                    <div class="ps-product__content">
+
+                        <a class="ps-product__title" href="product/{{product.url}}">
+                            {{product.name}}
+                        </a>
+
+                        <div class="ps-product__rating">
+
+                            <select class="ps-rating" data-read-only="true">
+
+                                <option *ngFor="let review of reviews[i]; let f = index" 
+                                [value]="review">{{f+1}}</option>
+                            
+                            </select>
+
+                            <span>{{rating[i]}}</span>
+
+                        </div>
+
+                        <div [innerHTML]="price[i][0]" class="">
+
+                        </div>
+                        <!-- <p class="ps-product__price">$22.99 - $32.99</p> -->
+
+                    </div>
+
+                    <div class="ps-product__content hover">
+
+                        <a class="ps-product__title" href="product/{{product.url}}">
+                            {{product.name}}
+                        </a>
+
+                        <div [innerHTML]="price[i][0]" class=""></div>
+                        <!-- <p class="ps-product__price">$22.99 - $32.99</p> -->
+
+                    </div>
+
+                </div>
+
+            {{ lastIndex ? callback() : ""}}
+            </div><!-- End Product -->
+
+    </div>
+  </div>
+</div>
+<!-- End Recommended Items -->
+  <!-- preload -->
+  <div *ngIf="cargando" class="">
+    <div class="text-center">
+        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>          
+</div>
