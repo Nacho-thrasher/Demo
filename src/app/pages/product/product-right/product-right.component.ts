@@ -88,9 +88,10 @@ export class ProductRightComponent implements OnInit {
     if(this.render){
 
       this.render = false;
-
-      Rating.fnc();
-
+      setTimeout(function(){
+        Rating.fnc();
+      },1000)
+      
     }
   }
 

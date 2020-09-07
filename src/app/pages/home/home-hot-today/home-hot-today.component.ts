@@ -302,26 +302,40 @@ export class HomeHotTodayComponent implements OnInit {
 						let type;
 						let value;
 						let offer;
+            let offerDate;
+            let today = new Date();
 
 						if(top20Array[i][f].offer != ""){
 
-							type = JSON.parse(top20Array[i][f].offer)[0];
-							value = JSON.parse(top20Array[i][f].offer)[1];	
+              offerDate = new Date(
+                //split averiguar
+                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[0]),
+                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[1])-1,
+                parseInt(JSON.parse(top20Array[i][f].offer)[2].split("-")[2])
+        
+              )
+              if (today < offerDate) { 
+      
+                type = JSON.parse(top20Array[i][f].offer)[0];
+                value = JSON.parse(top20Array[i][f].offer)[1];	
 
-							if(type == "Disccount"){
+                if(type == "Disccount"){
 
-								offer = (top20Array[i][f].price - (top20Array[i][f].price * value/100)).toFixed(2)
+                  offer = (top20Array[i][f].price - (top20Array[i][f].price * value/100)).toFixed(2)
 
-							}
+                }
 
-							if(type == "Fixed"){
+                if(type == "Fixed"){
 
-								offer = value
-								
-							}
+                  offer = value
+                  
+                }
 
-							price = `<p class="ps-product__price sale">$${offer} <del>$${top20Array[i][f].price} </del></p>`;
-
+                price = `<p class="ps-product__price sale">$${offer} <del>$${top20Array[i][f].price} </del></p>`;
+              }else{
+                price =  `<p class="ps-product__price">$${top20Array[i][f].price} </p>`;  
+              }
+                
 						}else{
 
 							price =  `<p class="ps-product__price">$${top20Array[i][f].price} </p>`;

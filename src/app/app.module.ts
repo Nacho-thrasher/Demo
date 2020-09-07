@@ -35,6 +35,7 @@ import { BoughtTogetherComponent } from './pages/product/product-left/bought-tog
 import { VendorStoreComponent } from './pages/product/product-left/vendor-store/vendor-store.component';
 import { ReviewsComponent } from './pages/product/product-left/reviews/reviews.component';
 import { SimilarBoughtComponent } from './pages/product/similar-bought/similar-bought.component';
+import { RelatedProductComponent } from './pages/product/related-product/related-product.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { SimilarBoughtComponent } from './pages/product/similar-bought/similar-b
     VendorStoreComponent,
     ReviewsComponent,
     SimilarBoughtComponent,
+    RelatedProductComponent,
     
   ],
   imports: [

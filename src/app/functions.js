@@ -346,9 +346,21 @@ export let DinamicPrice = {
     let price;
     let disccount;
     let arrayPrice = [];
-  
+    let offerDate;
+    let today = new Date();
+
     if (response.offer != "") {
   
+      offerDate = new Date(
+        //split averiguar
+        parseInt(JSON.parse(response.offer)[2].split("-")[0]),
+        parseInt(JSON.parse(response.offer)[2].split("-")[1])-1,
+        parseInt(JSON.parse(response.offer)[2].split("-")[2])
+
+      )
+
+      if (today < offerDate) {
+      
         type = JSON.parse(response.offer)[0];
         value = JSON.parse(response.offer)[1];
   
@@ -361,9 +373,14 @@ export let DinamicPrice = {
         }
         disccount = `<div class="ps-product__badge">-${value}%</div> `;
         price = `<p class="ps-product__price sale">$<span class="end-price"> ${offer} </span><del>$${response.price} </del></p>`;
+      
+      }else{
+        price = `<p class="ps-product__price">$<span class="end-price"> ${response.price} </span></p>`;  
+      }  
+      
     }
     else{
-      price = `<p class="ps-product__price sale">$<span class="end-price"> ${response.price} </span></p>`;
+      price = `<p class="ps-product__price">$<span class="end-price"> ${response.price} </span></p>`;
     }
     // si stock es 0
     if (response.stock == 0) {

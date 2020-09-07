@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './../../../services/products.service';
 import { Path } from "../../../config";
 import { ActivatedRoute } from '@angular/router';
-import { Rating, DinamicRating, DinamicReviews, DinamicPrice, Pagination, select2Cofig } from "../../../functions";
+import { Rating, DinamicRating, DinamicReviews, DinamicPrice, Pagination, select2Cofig, Tabs } from "../../../functions";
 
 declare var jQuery: any;
 declare var $:any;
@@ -247,7 +247,7 @@ export class ProductsShowcaseComponent implements OnInit {
         Rating.fnc();
         Pagination.fnc();
         select2Cofig.fnc();
-        
+        Tabs.fnc();        
       //CAPTURAR SORT ITEMS ORDER
       $(".sortItems").change(function(){
           window.open(`products/${params}&${$(this).val()}`,'_top')
